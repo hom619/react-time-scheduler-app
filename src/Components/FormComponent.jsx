@@ -18,7 +18,6 @@ export const FormComponent = ({ addTask }) => {
   return (
     <form
       onSubmit={handleOnSubmit}
-      action="javascript:void(0)"
       className="border p-5 rounded shadow-lg mt-5"
     >
       <div className="row g-2">

@@ -2,9 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import { FormComponent } from "./Components/FormComponent";
 import { TableComponent } from "./Components/TableComponent";
-
+const allocatedHoursPerWeek = 24 * 7;
 const App = () => {
   const [taskList, setTaskList] = useState([]);
+
   const randomIdGenerator = (length) => {
     const randomString = "1234567890qwertyuiopasdfghjklzxcvbnm";
     let uniqueId = "Task-";
@@ -20,6 +21,18 @@ const App = () => {
       uniqueId: randomIdGenerator(4),
       type: "entry",
     };
+    if (taskObj.hr > allocatedHoursPerWeek) {
+      alert(
+        `Sorry, total allocated hours per week is ${allocatedHoursPerWeek} hours`
+      );
+      return;
+    }
+    if (totalhours + taskObj.hr > allocatedHoursPerWeek) {
+      alert(
+        `Sorry, you exceeded total allocated hours per week: ${allocatedHoursPerWeek} hrs`
+      );
+      return;
+    }
     setTaskList([...taskList, obj]);
   };
   const handleDeleteAction = (id) => {
@@ -39,6 +52,10 @@ const App = () => {
       })
     );
   };
+  const totalhours = taskList.reduce(
+    (acc, item) => acc + parseFloat(item.hr),
+    0
+  );
   return (
     <>
       <div className="wrapper pt-5">
@@ -53,6 +70,10 @@ const App = () => {
             handleSwitchAction={handleSwitchAction}
             handleDeleteAction={handleDeleteAction}
           />
+          <div className="alert alert-success">
+            The total hours allocated is{" "}
+            <span id="totalhours">{totalhours}</span> hrs
+          </div>
         </div>
       </div>
     </>

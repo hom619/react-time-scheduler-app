@@ -7,6 +7,10 @@ export const TableComponent = ({
   handleSwitchAction,
   handleDeleteAction,
 }) => {
+  const badList = taskList.filter((task) => task.type === "bad");
+  const savedHours = badList.reduce((acc, item) => {
+    return acc + parseFloat(item.hr);
+  }, 0);
   return (
     <div className="row mt-5">
       {/* <!-- Entry List table --> */}
@@ -95,11 +99,9 @@ export const TableComponent = ({
           </tbody>
         </table>
         <div className="alert alert-success">
-          You can save <span id="savedhours">0</span> hrs
+          You can save {""}
+          <span id="savedhours">{savedHours}</span> hrs
         </div>
-      </div>
-      <div className="alert alert-success">
-        The total hours allocated is <span id="totalhours">0</span> hrs
       </div>
     </div>
   );
