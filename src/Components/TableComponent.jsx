@@ -9,7 +9,7 @@ export const TableComponent = ({
 }) => {
   const badList = taskList.filter((task) => task.type === "bad");
   const savedHours = badList.reduce((acc, item) => {
-    return acc + parseFloat(item.hr);
+    return acc + item.hr;
   }, 0);
   return (
     <div className="row mt-5">

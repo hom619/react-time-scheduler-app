@@ -52,10 +52,7 @@ const App = () => {
       })
     );
   };
-  const totalhours = taskList.reduce(
-    (acc, item) => acc + parseFloat(item.hr),
-    0
-  );
+  const totalhours = taskList.reduce((acc, item) => acc + item.hr, 0);
   return (
     <>
       <div className="wrapper pt-5">

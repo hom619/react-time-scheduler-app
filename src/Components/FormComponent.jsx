@@ -8,7 +8,7 @@ export const FormComponent = ({ addTask }) => {
     const { name, value } = e.target;
     setTask({
       ...taskObj,
-      [name]: value,
+      [name]: name === "hr" ? +value : value,
     });
   };
   const handleOnSubmit = (e) => {
